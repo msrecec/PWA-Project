@@ -1,0 +1,43 @@
+
+.TheSection {
+  background-color: white;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.TheSection__figure__img {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.TheSection__figure {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.TheSection__header__span-category {
+  color: rgb(226, 82, 82);
+  font-weight: bold;
+}
+
+.TheSection__header__span-timestamp {
+  color: rgb(126, 124, 120);
+}
+
+.TheSection__article {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 5rem;
+}
+
+.TheSection__header {
+  margin: 0 auto;
+  width: 90%;
+  padding-bottom: 2rem;
+}
+
+.TheSection__header__title {
+  font-size: 2.5rem;
+}
