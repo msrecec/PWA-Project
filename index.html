@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <title>L'Express</title>
   <style>
     * {
@@ -98,10 +99,21 @@
         height: 7rem;
       }
 
+      #TheNavigation {
+        height: 5rem;
+      }
+
+      .fixed {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 20;
+      }
+
       .nav__list {
         display: flex;
       }
-      
+
       .section__header {
         margin-left: 0.5rem;
       }
@@ -126,7 +138,7 @@
         height: 17rem;
       }
 
-      #TheNavigation a{
+      #TheNavigation a {
         width: 100% !important;
       }
 
@@ -141,7 +153,7 @@
         /* explanation below */
         padding: 0.75rem;
       }
-      
+
       .nav__list__li {
         flex: 1 0 50%;
       }
@@ -152,12 +164,12 @@
       #TheHeader {
         height: 17rem;
       }
-      
+
       .section__header {
         margin-left: 1rem;
       }
-      
-      #TheNavigation a{
+
+      #TheNavigation a {
         width: 100% !important;
       }
 
@@ -166,6 +178,7 @@
       .article {
         flex: 1 0 100%;
         padding: 0.25rem;
+        margin: 1.5rem 0rem 1.5rem 0rem;
       }
     }
 
@@ -208,20 +221,13 @@
 
     }
 
-    .article:nth-child(1) h3 {
-      color: rgb(226, 82, 82);
-    }
-
-    .article:nth-child(2) h3 {
-      color: rgb(226, 82, 82);
-    }
-
-    .article:nth-child(3) h3 {
+    .article h3 {
       color: rgb(91, 91, 199);
     }
 
-    .article:nth-child(4) h3 {
-      color: rgb(91, 91, 199);
+    .article:nth-child(4n+1) h3,
+    .article:nth-child(4n+2) h3 {
+      color: rgb(226, 82, 82);
     }
 
     #TheFooter {
@@ -374,6 +380,17 @@
   <footer id="TheFooter">
     <p>Les sites du reseau Groupe L'Epress: Food avec Mycuisine.fr</p>
   </footer>
+  <script>
+    var height = $('#TheHeader').height();
+
+    $(window).scroll(function() {
+      if($(this).scrollTop() > height) {
+        $('#navigation-container').addClass('fixed');
+      } else {
+        $('#navigation-container').removeClass('fixed');
+      }
+    })
+  </script>
 </body>
 
 </html>
