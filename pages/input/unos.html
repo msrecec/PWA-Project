@@ -46,7 +46,7 @@
     </nav>
     <main id="TheMain">
       <div class="form-container">
-        <form class="TheForm" action="skripta.php" method="POST">
+        <form enctype="multipart/form-data" class="TheForm" action="skripta.php" method="POST">
           <div class="form__item">
             <label for="title">Naslov vijesti
               <div class="form__item__field">
@@ -79,7 +79,7 @@
             <label for="category">Kategorija vijesti
               <div class="form__item__field">
                 <select name="category" id="category" class="form__item__field__select">
-                  <option value="SVIJET">Svijet</option>
+                  <option select="selected" value="SVIJET">Svijet</option>
                   <option value="EKONOMIJA">Ekonomija</option>
                   <option value="SPORT">Sport</option>
                   <option value="KULTURA">Kultura</option>
