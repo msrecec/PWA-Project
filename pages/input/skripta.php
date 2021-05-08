@@ -6,13 +6,34 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../css/header.css">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/footer.css">
+  <link rel="stylesheet" href="../../css/navigation.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../page/css/page.css">
   <title>L'Express</title>
   <style>
   </style>
 </head>
-
+<?php
+if(
+  isset($_POST['title'])&&isset($_POST['about'])
+  &&isset($_POST['content'])&&isset($_POST['photo'])
+  &&isset($_POST['category'])/*&&isset($_POST['archive'])*/) {
+    $title = $_POST['title'];
+    // $about = $_POST['about'];
+    $about = nl2br(htmlentities($_POST['about'], ENT_QUOTES, 'UTF-8'));
+    // $content = $_POST['content'];
+    $content = nl2br(htmlentities($_POST['content'], ENT_QUOTES, 'UTF-8'));
+    $photo = $_POST['photo'];
+    $category = $_POST['category'];
+    // $title = $_POST['archive'];
+} else {
+  header("location:javascript://history.go(-1)");
+  die();
+}
+?>
 <body>
   <div id="TheContainer">
     <header id="TheHeader"></header>
@@ -23,16 +44,19 @@
             <a class="nav__list__li__a" href="/projekt/index.html">HOME</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">MONDE</a>
+            <a class="nav__list__li__a" href="">SVIJET</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">ECONOMIE</a>
+            <a class="nav__list__li__a" href="">EKONOMIJA</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">ADMINISTRACIJA</a>
+            <a class="nav__list__li__a" href="">SPORT</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">OFFRES LOCALES</a>
+            <a class="nav__list__li__a" href="">KULTURA</a>
+          </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="/projekt/pages/input/unos.html">UNOS</a>
           </li>
         </ul>
       </div>
@@ -40,26 +64,18 @@
     <main id="TheMain">
       <section class="TheSection">
         <header class="TheSection__header">
-          <span class="TheSection__header__span-category">MONDE</span>
-          <h1 class="TheSection__header__title">Royaume- Uni: le pro-Brexit Boris Johnson candidat au poste de Premier
-            ministre</h1>
+          <span class="TheSection__header__span-category"><?php echo $category;?></span>
+          <h1 class="TheSection__header__title"><?php echo $title;?></h1>
           <span class="TheSection__header__span-timestamp">publie le 16/05/2019 a 19:35</span>
         </header>
         <figure class="TheSection__figure">
-          <img class="TheSection__figure__img" src="../assets/images/boris.jpg" alt="">
+          <!-- <img class="TheSection__figure__img" src="/projekt/assets/images/boris.jpg" alt=""> -->
+          <?php echo $photo;?>
         </figure>
         <article class="TheSection__article">
-          <h3>L'ancien maire de Londres avait refuse de prendre le poste en 2016, apres la campagne pour le referendum
-            ou il est accuse d'avoir induit les electeurs en erreur.</h3>
-
-          <p>Trois ans apres y avoir renonce une premiere fois, l'ancien ministre des Affaires etrangeres britannique
-            Boris Johnson a confirme ce jeudi qu'il serait candidat au poste de Premier ministre quand Theresa May
-            quitterait ses fonctions.
-            <br>
-            <br>
-            "Bien sur que je vais y aller", a declare ce fervent defenseur du Brexit lors d'un evenement reunissant le
-            monde des affaires a Manchester, dans le nord-ouest de l'Angleterre, confirmant ce que la pluparl de ses
-            collegues conservateurs et des commentateurs politiques supposaient.
+          <h3><?php echo $about;?></h3>
+          <br>
+          <p><?php echo $content;?>
           </p>
         </article>
       </section>
@@ -69,6 +85,7 @@
     <p>Les sites du reseau Groupe L'Epress: Food avec Mycuisine.fr</p>
   </footer>
   <script>
+
     var height = $('#TheHeader').height();
 
     $(window).scroll(function () {
@@ -78,6 +95,7 @@
         $('#navigation-container').removeClass('fixed');
       }
     })
+    
   </script>
 </body>
 

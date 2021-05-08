@@ -1,0 +1,27 @@
+
+.form-container {
+  background-color: white;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.TheForm {
+  display: block;
+  margin: 0 auto;
+  padding: 2rem !important;
+  max-width: 30rem !important;
+}
+
+.form__item {
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.form__item__field__text {
+  width: 100%;
+
+}
+
+textarea, input {
+  border-radius: 4px;
+}

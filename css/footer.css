@@ -1,0 +1,16 @@
+
+#TheFooter {
+  height: 10rem;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+
+}
+
+#TheFooter p {
+  margin: 0 auto;
+  max-width: 68rem;
+  padding: 0;
+}
