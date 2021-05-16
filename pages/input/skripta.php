@@ -31,7 +31,7 @@ if(
     $this_date = date("Y/m/d H:i:s");
     // handle image uploads
 
-    $target_dir = "uploads/";
+    $target_dir = "../../uploads/images/";
     $target_file = $target_dir . basename($_FILES["photo"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -55,7 +55,7 @@ if(
     }
     
     // Check file size
-    if ($_FILES["photo"]["size"] > 500000) {
+    if ($_FILES["photo"]["size"] > 20000000) {
       echo "Sorry, your file is too large.";
       $uploadOk = 0;
     }
