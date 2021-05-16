@@ -39,7 +39,7 @@
             <a class="nav__list__li__a" href="">KULTURA</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="/projekt/pages/input/unos.html">UNOS</a>
+            <a class="nav__list__li__a" href="/projekt/pages/input/unos.php">UNOS</a>
           </li>
         </ul>
       </div>

@@ -97,7 +97,7 @@ if(
       <div id="navigation-container">
         <ul class="nav__list">
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="/projekt/index.html">HOME</a>
+            <a class="nav__list__li__a" href="/projekt/index.php">HOME</a>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="">SVIJET</a>
