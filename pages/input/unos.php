@@ -17,10 +17,6 @@
   </style>
 </head>
 
-<?php
-include "./projekt/config/connect.php";
-?>
-
 <body>
   <div id="TheContainer">
     <header id="TheHeader"></header>
@@ -110,17 +106,15 @@ include "./projekt/config/connect.php";
     <p>Les sites du reseau Groupe L'Epress: Food avec Mycuisine.fr</p>
   </footer>
   <script>
+  var height = $('#TheHeader').height();
 
-    var height = $('#TheHeader').height();
-
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > height) {
-        $('#navigation-container').addClass('fixed');
-      } else {
-        $('#navigation-container').removeClass('fixed');
-      }
-    })
-
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > height) {
+      $('#navigation-container').addClass('fixed');
+    } else {
+      $('#navigation-container').removeClass('fixed');
+    }
+  })
   </script>
 </body>
 

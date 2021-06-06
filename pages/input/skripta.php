@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="../../css/header.css">
-  <link rel="stylesheet" href="../../css/main.css">
-  <link rel="stylesheet" href="../../css/footer.css">
-  <link rel="stylesheet" href="../../css/navigation.css">
-  <link rel="stylesheet" href="../../css/style.css">
-  <link rel="stylesheet" href="../page/css/page.css">
-  <title>L'Express</title>
-  <style>
-  </style>
-</head>
 <?php
 if(
   isset($_POST['title'])&&isset($_POST['about'])
@@ -78,9 +60,13 @@ if(
         echo "Sorry, there was an error uploading your file.";
       }
     }
-
-
-} else {
+    
+    header("Location: http://localhost/projekt/index.php");
+    
+} else if(  isset($_GET['title'])&&isset($_GET['about'])
+&&isset($_GET['content'])
+&&isset($_GET['category'])
+&&isset($_FILES["photo"])) {
   // header("location:javascript://history.go(-1)");
   // die();
   $title = "['title']";
@@ -90,68 +76,3 @@ if(
   $category = 'category';
 }
 ?>
-<body>
-  <div id="TheContainer">
-    <header id="TheHeader"></header>
-    <nav id="TheNavigation">
-      <div id="navigation-container">
-        <ul class="nav__list">
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="/projekt/index.php">HOME</a>
-          </li>
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">SVIJET</a>
-          </li>
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">EKONOMIJA</a>
-          </li>
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">SPORT</a>
-          </li>
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">KULTURA</a>
-          </li>
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="/projekt/pages/input/unos.html">UNOS</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <main id="TheMain">
-      <section class="TheSection">
-        <header class="TheSection__header">
-          <span class="TheSection__header__span-category"><?php echo $category;?></span>
-          <h1 class="TheSection__header__title"><?php echo $title;?></h1>
-          <span class="TheSection__header__span-timestamp">objavljeno: <?php echo $this_date ?></span>
-        </header>
-        <figure class="TheSection__figure">
-          <img class="TheSection__figure__img" src="<?php echo $target_file;?>" alt="">
-        </figure>
-        <article class="TheSection__article">
-          <h3><?php echo $about;?></h3>
-          <br>
-          <p><?php echo $content;?>
-          </p>
-        </article>
-      </section>
-    </main>
-  </div>
-  <footer id="TheFooter">
-    <p>Les sites du reseau Groupe L'Epress: Food avec Mycuisine.fr</p>
-  </footer>
-  <script>
-
-    var height = $('#TheHeader').height();
-
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > height) {
-        $('#navigation-container').addClass('fixed');
-      } else {
-        $('#navigation-container').removeClass('fixed');
-      }
-    })
-    
-  </script>
-</body>
-
-</html>
