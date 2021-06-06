@@ -1,22 +1,71 @@
 <?php
+
+include "../../config/connect.php";
+
 if(
   isset($_POST['title'])&&isset($_POST['about'])
-  &&isset($_POST['content'])/*&&isset($_POST['photo']*/
-  &&isset($_POST['category'])/*&&isset($_POST['archive'])*/
+  &&isset($_POST['content'])
+  &&isset($_POST['category'])
   &&isset($_FILES["photo"])) {
+    
+    // title
+
     $title = $_POST['title'];
     $about = nl2br(htmlentities($_POST['about'], ENT_QUOTES, 'UTF-8'));
     $content = nl2br(htmlentities($_POST['content'], ENT_QUOTES, 'UTF-8'));
-    // $photo = $_POST['photo'];
     $category = $_POST['category'];
-    // $title = $_POST['archive'];
     $this_date = date("Y/m/d H:i:s");
+    
+    $target_dir = "../../uploads/images/";
+
+    //------------------------------------------------------------------------------
+
+    // atomic transaction
+
+    //------------------------------------------------------------------------------
+
+    $conn->autocommit(false);
+    
+    $stmt = $conn->prepare("INSERT INTO vijesti(datum, naslov, sazetak, tekst, kategorija, arhiva) VALUES (?, ?, ?, ?, ?, ?)");
+
+    $archive = isset($_POST['archive']) ? 1 : 0;
+    
+    $stmt->bind_param("sssssi", date('d-m-Y'), $title, $about, $content, $category, $archive);
+    
+    $last_id;
+    
+    if($stmt->execute()) {
+      $last_id = $conn->insert_id;
+    }
+
+    $target_file = $target_dir . $last_id . '.' .  strtolower(pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION));
+
+    $stmt = $conn->prepare("UPDATE vijesti SET slika = ? WHERE id = ?");
+
+    $stmt->bind_param("si", $target_file, $last_id);
+
+    $stmt->execute();
+    
+    $stmt->close();
+
+    // Commit transaction
+    if (!$conn -> commit()) {
+      echo "Commit transaction failed";
+      die();
+    }
+
+    $conn->autocommit(true);
+
+    $conn->close();
+    
+    //------------------------------------------------------------------------------
+
     // handle image uploads
 
-    $target_dir = "../../uploads/images/";
-    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+    //------------------------------------------------------------------------------
+
     $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     
     // Check if image file is a actual image or fake image
     if(isset($_POST["submit"])) {
@@ -60,15 +109,16 @@ if(
         echo "Sorry, there was an error uploading your file.";
       }
     }
+
+    //------------------------------------------------------------------------------
     
+    // redirrect to the frontpage
     header("Location: http://localhost/projekt/index.php");
     
 } else if(  isset($_GET['title'])&&isset($_GET['about'])
 &&isset($_GET['content'])
 &&isset($_GET['category'])
 &&isset($_FILES["photo"])) {
-  // header("location:javascript://history.go(-1)");
-  // die();
   $title = "['title']";
   $about = "nl2br(htmlentities(['about'], ENT_QUOTES, 'UTF-8'))";
   $content = "nl2br(htmlentities(['content'], ENT_QUOTES, 'UTF-8'))";
