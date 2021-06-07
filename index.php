@@ -19,6 +19,11 @@ if(mysqli_num_rows($result) == 0) {
   for($i = 0; $i < $MAX_LISTINGS; ++$i) {
     $row = mysqli_fetch_array($result);
     if (!$row) break;
+    if ($row['arhiva'] === '1') {
+      $MAX_LISTINGS++;
+      $i--;
+      continue;
+    }
     $vijesti[$i] = $row;
     $vijesti[$i]['id'] = $row['id'];
     $vijesti[$i]['datum'] = $row['datum'];

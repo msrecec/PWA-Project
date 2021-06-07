@@ -103,7 +103,7 @@ if(
       echo "Sorry, your file was not uploaded.";
     // if everything is ok, try to upload file
     } else {
-      if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
+      if (move_uploaded_file($_FILES["photo"]["tmp_name"], '../../uploads/images/' . $last_id . '.' .  strtolower(pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION)))) {
         echo "The file ". htmlspecialchars( basename( $_FILES["photo"]["name"])). " has been uploaded.";
       } else {
         echo "Sorry, there was an error uploading your file.";
