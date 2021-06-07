@@ -30,7 +30,7 @@ if(
 
     $archive = isset($_POST['archive']) ? 1 : 0;
     
-    $stmt->bind_param("sssssi", date('d-m-Y'), $title, $about, $content, $category, $archive);
+    $stmt->bind_param("sssssi", $this_date, $title, $about, $content, $category, $archive);
     
     $last_id;
     
@@ -49,9 +49,9 @@ if(
     $stmt->close();
 
     // Commit transaction
+    
     if (!$conn -> commit()) {
-      echo "Commit transaction failed";
-      die();
+      die('Commit transaction failed');
     }
 
     $conn->autocommit(true);
@@ -113,16 +113,10 @@ if(
     //------------------------------------------------------------------------------
     
     // redirrect to the frontpage
+
+    //------------------------------------------------------------------------------
+    
     header("Location: http://localhost/projekt/index.php");
     
-} else if(  isset($_GET['title'])&&isset($_GET['about'])
-&&isset($_GET['content'])
-&&isset($_GET['category'])
-&&isset($_FILES["photo"])) {
-  $title = "['title']";
-  $about = "nl2br(htmlentities(['about'], ENT_QUOTES, 'UTF-8'))";
-  $content = "nl2br(htmlentities(['content'], ENT_QUOTES, 'UTF-8'))";
-  $photo = "[photo]";
-  $category = 'category';
 }
 ?>

@@ -1,4 +1,61 @@
-<!DOCTYPE html>
+<?php
+
+include './config/connect.php';
+
+$stmt = $conn->prepare("SELECT * FROM vijesti ORDER BY id DESC");
+
+if(!$stmt->execute()) {
+  $stmt->close();
+  $conn->close();
+  die('error while querying');
+}
+
+$result = $stmt->get_result();
+
+$stmt->close();
+
+$vijesti = array();
+
+if(mysqli_num_rows($result) == 0) {
+  $conn->close();
+  echo 'no content';
+} else {
+  $i = 5;
+  while($row = mysqli_fetch_array($result) && $i-- > 0) {
+    array_push($vijesti, $row);
+  }
+}
+
+$svijet = array();
+
+$ekonomija = array();
+
+if(!empty($vijesti)) {
+  for($i = 0; $i < count($vijesti); ++$i) {
+    if(strcmp($vijesti[$i]['kategorija'], 'EKONOMIJA') === 0) {
+      $temp = '<article class="article">
+      <a class="article__link" href="">
+        <div class="article__link__card">
+          <img src="/projekt/assets/images/grains.jpg" alt="grains">
+          <h3>XYLELLA FASTIDIOSA</h3>
+          <p>
+            Une bacterie tueuse d\'oliviers pourrait rejoindre le nord de l\'Europe
+          </p>
+        </div>
+      </a>
+    </article>';
+      array_push($ekonomija, $vijesti[$i]);
+    } else if(strcmp($vijesti[$i]['kategorija'], 'SVIJET') === 0) {
+      array_push($svijet, $vijesti[$i]);
+    }
+  }
+}
+
+$stmt->close();
+
+$conn->close();
+
+echo '<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +69,7 @@
   <link rel="stylesheet" href="./css/list.css">
   <link rel="stylesheet" href="./css/navigation.css">
   <link rel="stylesheet" href="./css/style.css">
-  <title>L'Express</title>
+  <title>L\'Express</title>
   <style>
   </style>
 </head>
@@ -31,12 +88,6 @@
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="">EKONOMIJA</a>
-          </li>
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">SPORT</a>
-          </li>
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">KULTURA</a>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/input/unos.php">UNOS</a>
@@ -67,7 +118,7 @@
                 <img src="/projekt/assets/images/grains.jpg" alt="grains">
                 <h3>XYLELLA FASTIDIOSA</h3>
                 <p>
-                  Une bacterie tueuse d'oliviers pourrait rejoindre le nord de l'Europe
+                  Une bacterie tueuse d\'oliviers pourrait rejoindre le nord de l\'Europe
                 </p>
               </div>
             </a>
@@ -107,7 +158,7 @@
                 <img src="/projekt/assets/images/pinault.jpg" alt="pinault">
                 <h3>"ONE PLANET LAB"</h3>
                 <p>
-                  Transition ecologique: Macron charge Pinault de mobiliser l'industrie de la mode
+                  Transition ecologique: Macron charge Pinault de mobiliser l\'industrie de la mode
                 </p>
               </div>
             </a>
@@ -118,7 +169,7 @@
                 <img src="/projekt/assets/images/whatsapp.jpg" alt="whatsapp">
                 <h3>CONCURRENCE</h3>
                 <p>
-                  Le fondateour de Telegram enfonce WhatsApp, victime d'une nouvelle faille
+                  Le fondateour de Telegram enfonce WhatsApp, victime d\'une nouvelle faille
                 </p>
               </div>
             </a>
@@ -127,7 +178,7 @@
             <a class="article__link" href="">
               <div class="article__link__card">
                 <img src="/projekt/assets/images/zuck.jpg" alt="zuck">
-                <h3>LE DOSSIER DE L'EXPRESS</h3>
+                <h3>LE DOSSIER DE L\'EXPRESS</h3>
                 <p>
                   Le veritable inventeur de "The Face Book" veut voir "Zuckerberg en prison"
                 </p>
@@ -138,7 +189,7 @@
             <a class="article__link" href="">
               <div class="article__link__card">
                 <img src="/projekt/assets/images/zuck.jpg" alt="zuck">
-                <h3>LE DOSSIER DE L'EXPRESS</h3>
+                <h3>LE DOSSIER DE L\'EXPRESS</h3>
                 <p>
                   Le veritable inventeur de "The Face Book" veut voir "Zuckerberg en prison"
                 </p>
@@ -150,19 +201,20 @@
     </main>
   </div>
   <footer id="TheFooter">
-    <p>Les sites du reseau Groupe L'Epress: Food avec Mycuisine.fr</p>
+    <p>Les sites du reseau Groupe L\'Epress: Food avec Mycuisine.fr</p>
   </footer>
   <script>
-    var height = $('#TheHeader').height();
+    var height = $(\'#TheHeader\').height();
 
     $(window).scroll(function() {
       if($(this).scrollTop() > height) {
-        $('#navigation-container').addClass('fixed');
+        $(\'#navigation-container\').addClass(\'fixed\');
       } else {
-        $('#navigation-container').removeClass('fixed');
+        $(\'#navigation-container\').removeClass(\'fixed\');
       }
     })
   </script>
 </body>
 
-</html>
+</html>';
+?>

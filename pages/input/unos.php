@@ -33,12 +33,6 @@
             <a class="nav__list__li__a" href="">EKONOMIJA</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">SPORT</a>
-          </li>
-          <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">KULTURA</a>
-          </li>
-          <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/input/unos.html">UNOS</a>
           </li>
         </ul>
@@ -81,8 +75,6 @@
                 <select name="category" id="category" class="form__item__field__select">
                   <option select="selected" value="SVIJET">Svijet</option>
                   <option value="EKONOMIJA">Ekonomija</option>
-                  <option value="SPORT">Sport</option>
-                  <option value="KULTURA">Kultura</option>
                 </select>
               </div>
             </label>
