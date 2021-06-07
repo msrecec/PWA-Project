@@ -72,13 +72,16 @@ echo '<!DOCTYPE html>
             <a class="nav__list__li__a" href="/projekt/index.php">HOME</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">SVIJET</a>
+            <a class="nav__list__li__a" href="../listings/categories.php?kategorija=SVIJET">SVIJET</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">EKONOMIJA</a>
+            <a class="nav__list__li__a" href="../listings/categories.php?kategorija=EKONOMIJA">EKONOMIJA</a>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/input/unos.php">UNOS</a>
+          </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="/projekt/pages/admin/administracija.php">ADMINISTRACIJA</a>
           </li>
         </ul>
       </div>
@@ -86,7 +89,7 @@ echo '<!DOCTYPE html>
     <main id="TheMain">
       <section class="TheSection">
         <header class="TheSection__header">
-          <span class="TheSection__header__span-category">MONDE</span>
+          <span class="TheSection__header__span-category">' . $vijesti['kategorija'] . '</span>
           <h1 class="TheSection__header__title">' . $vijesti['naslov'] . '</h1>
           <span class="TheSection__header__span-timestamp">' . $vijesti['datum'] . '</span>
         </header>

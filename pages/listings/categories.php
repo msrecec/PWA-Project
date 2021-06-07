@@ -1,25 +1,40 @@
 <?php
 
+if(!isset($_GET['kategorija'])) {
+  header("Location: http://localhost/projekt/index.php");
+}
+
+$kategorija = $_GET['kategorija'];
+
 include '../../config/connect.php';
 
-$MAX_LISTINGS = 8;
+$query = "SELECT * FROM vijesti WHERE kategorija = ? AND arhiva = 0 ORDER BY id DESC";
 
-$query = "SELECT * FROM vijesti ORDER BY id DESC";
+$stmt = $conn->prepare($query);
 
-$result = $conn->query($query);
+$stmt->bind_param('s', $kategorija);
+
+if(!$stmt->execute()) {
+  $stmt->close();
+  $conn->close();
+  header("Location: http://localhost/projekt/index.php");
+}
+
+$result = $stmt->get_result();
+
+$stmt->close();
 
 if(!$result) die('Error while querying');
 
 $vijesti = array();
 
 if(mysqli_num_rows($result) == 0) {
-  // $conn->close();
-  // die('no content');
+  $conn->close();
+  header("Location: http://localhost/projekt/index.php");
 } else {
-  for($i = 0; $i < $MAX_LISTINGS; ++$i) {
-    $row = mysqli_fetch_array($result);
+  $i = 0;
+  while($row = mysqli_fetch_array($result)) {
     if (!$row) break;
-    
     $vijesti[$i] = $row;
     $vijesti[$i]['id'] = $row['id'];
     $vijesti[$i]['datum'] = $row['datum'];
@@ -29,16 +44,16 @@ if(mysqli_num_rows($result) == 0) {
     $vijesti[$i]['slika'] = $row['slika'];
     $vijesti[$i]['kategorija'] = $row['kategorija'];
     $vijesti[$i]['arhiva'] = $row['arhiva'];
+    $i++;
   }
 }
 
-$svijet = '';
-
-$ekonomija = '';
+$listings = '';
 
 if(!empty($vijesti)) {
   for($i = 0; $i < count($vijesti); ++$i) {
     $temp = '<article class="article">
+    <a class="article__link" href="' . '../../pages/page/clanak.php?id=' . $vijesti[$i]['id'] . '' . '">
       <div class="article__link__card">
         <img src="' . $vijesti[$i]['slika'] . '" alt="grains">
         <h3>' . $vijesti[$i]['naslov'] . '</h3>
@@ -46,17 +61,10 @@ if(!empty($vijesti)) {
           ' . $vijesti[$i]['sazetak'] . '
         </p>
       </div>
+    </a>
   </article>
-  <div style="display: flex; align-items: center; justify-content:center; margin: 2px;">
-  <a style="margin-right: 5px" href="edit.php?id=' . $vijesti[$i]['id'] . '"><button>Editiraj</button></a>
-  <a href="delete.php?id=' . $vijesti[$i]['id'] . '"><button>Izbrisi</button></a>
-  </div>
   ';
-    if(strcmp($vijesti[$i]['kategorija'], 'EKONOMIJA') === 0) {
-      $ekonomija = $ekonomija . $temp;
-    } else if(strcmp($vijesti[$i]['kategorija'], 'SVIJET') === 0) {
-      $svijet = $svijet . $temp;
-    }
+  $listings = $listings . $temp;
   }
 }
 
@@ -91,10 +99,10 @@ echo '<!DOCTYPE html>
             <a class="nav__list__li__a" href="../../index.php">HOME</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="/projekt/pages/listings/categories.php?kategorija=SVIJET">SVIJET</a>
+            <a class="nav__list__li__a" href="categories.php?kategorija=SVIJET">SVIJET</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="/projekt/pages/listings/categories.php?kategorija=EKONOMIJA">EKONOMIJA</a>
+            <a class="nav__list__li__a" href="categories.php?kategorija=EKONOMIJA">EKONOMIJA</a>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/input/unos.php">UNOS</a>
@@ -108,18 +116,10 @@ echo '<!DOCTYPE html>
     <main id="TheMain">
       <section class="section">
         <header class="section__header">
-          <h2>SVIJET</h2>
+          <h2>' . $kategorija . '</h2>
         </header>
         <div class="article-container">
-          ' . $svijet . '
-        </div>
-      </section>
-      <section class="section">
-        <header class="section__header">
-          <h2>EKONOMIJA</h2>
-        </header>
-        <div class="article-container">
-        ' . $ekonomija . '
+          ' . $listings . '
         </div>
       </section>
     </main>

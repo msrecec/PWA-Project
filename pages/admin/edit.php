@@ -35,6 +35,9 @@
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/input/unos.html">UNOS</a>
           </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="/projekt/pages/admin/administracija.php">ADMINISTRACIJA</a>
+          </li>
         </ul>
       </div>
     </nav>

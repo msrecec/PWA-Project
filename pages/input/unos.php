@@ -27,13 +27,16 @@
             <a class="nav__list__li__a" href="/projekt/index.php">HOME</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">SVIJET</a>
+            <a class="nav__list__li__a" href="../listings/categories.php?kategorija=SVIJET">SVIJET</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">EKONOMIJA</a>
+            <a class="nav__list__li__a" href="../listings/categories.php?kategorija=EKONOMIJA">EKONOMIJA</a>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/input/unos.html">UNOS</a>
+          </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="/projekt/pages/admin/administracija.php">ADMINISTRACIJA</a>
           </li>
         </ul>
       </div>

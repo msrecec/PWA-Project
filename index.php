@@ -92,13 +92,16 @@ echo '<!DOCTYPE html>
             <a class="nav__list__li__a" href="">HOME</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">SVIJET</a>
+            <a class="nav__list__li__a" href="./pages/listings/categories.php?kategorija=SVIJET">SVIJET</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="">EKONOMIJA</a>
+            <a class="nav__list__li__a" href="./pages/listings/categories.php?kategorija=EKONOMIJA">EKONOMIJA</a>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/input/unos.php">UNOS</a>
+          </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="/projekt/pages/admin/administracija.php">ADMINISTRACIJA</a>
           </li>
         </ul>
       </div>
