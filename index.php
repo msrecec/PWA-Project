@@ -2,56 +2,59 @@
 
 include './config/connect.php';
 
-$stmt = $conn->prepare("SELECT * FROM vijesti ORDER BY id DESC");
+$MAX_LISTINGS = 8;
 
-if(!$stmt->execute()) {
-  $stmt->close();
-  $conn->close();
-  die('error while querying');
-}
+$query = "SELECT * FROM vijesti";
 
-$result = $stmt->get_result();
+$result = $conn->query($query);
 
-$stmt->close();
+if(!$result) die('Error while querying');
 
 $vijesti = array();
 
 if(mysqli_num_rows($result) == 0) {
-  $conn->close();
-  echo 'no content';
+  // $conn->close();
+  // die('no content');
 } else {
-  $i = 5;
-  while($row = mysqli_fetch_array($result) && $i-- > 0) {
-    array_push($vijesti, $row);
+  for($i = 0; $i < $MAX_LISTINGS; ++$i) {
+    $row = mysqli_fetch_array($result);
+    if (!$row) break;
+    $vijesti[$i] = $row;
+    $vijesti[$i]['id'] = $row['id'];
+    $vijesti[$i]['datum'] = $row['datum'];
+    $vijesti[$i]['naslov'] = $row['naslov'];
+    $vijesti[$i]['sazetak'] = $row['sazetak'];
+    $vijesti[$i]['tekst'] = $row['tekst'];
+    $vijesti[$i]['slika'] = $row['slika'];
+    $vijesti[$i]['kategorija'] = $row['kategorija'];
+    $vijesti[$i]['arhiva'] = $row['arhiva'];
   }
 }
 
-$svijet = array();
+$svijet = '';
 
-$ekonomija = array();
+$ekonomija = '';
 
 if(!empty($vijesti)) {
   for($i = 0; $i < count($vijesti); ++$i) {
+    $temp = '<article class="article">
+    <a class="article__link" href="">
+      <div class="article__link__card">
+        <img src="' . $vijesti[$i]['slika'] . '" alt="grains">
+        <h3>' . $vijesti[$i]['naslov'] . '</h3>
+        <p>
+          ' . $vijesti[$i]['sazetak'] . '
+        </p>
+      </div>
+    </a>
+  </article>';
     if(strcmp($vijesti[$i]['kategorija'], 'EKONOMIJA') === 0) {
-      $temp = '<article class="article">
-      <a class="article__link" href="">
-        <div class="article__link__card">
-          <img src="/projekt/assets/images/grains.jpg" alt="grains">
-          <h3>XYLELLA FASTIDIOSA</h3>
-          <p>
-            Une bacterie tueuse d\'oliviers pourrait rejoindre le nord de l\'Europe
-          </p>
-        </div>
-      </a>
-    </article>';
-      array_push($ekonomija, $vijesti[$i]);
+      $ekonomija = $ekonomija . $temp;
     } else if(strcmp($vijesti[$i]['kategorija'], 'SVIJET') === 0) {
-      array_push($svijet, $vijesti[$i]);
+      $svijet = $svijet . $temp;
     }
   }
 }
-
-$stmt->close();
 
 $conn->close();
 
@@ -101,50 +104,7 @@ echo '<!DOCTYPE html>
           <h2>SVIJET</h2>
         </header>
         <div class="article-container">
-          <article class="article">
-            <a class="article__link" href="/projekt/pages/page/boris.html">
-              <div class="article__link__card">
-                <img src="/projekt/assets/images/boris.jpg" alt="boris">
-                <h3>COME-BACK</h3>
-                <p>
-                  Royaume-Uni:le pro-Brexit Boris Johnson candidat au poste de Premier ministre
-                </p>
-              </div>
-            </a>
-          </article>
-          <article class="article">
-            <a class="article__link" href="">
-              <div class="article__link__card">
-                <img src="/projekt/assets/images/grains.jpg" alt="grains">
-                <h3>XYLELLA FASTIDIOSA</h3>
-                <p>
-                  Une bacterie tueuse d\'oliviers pourrait rejoindre le nord de l\'Europe
-                </p>
-              </div>
-            </a>
-          </article>
-          <article class="article">
-            <a class="article__link" href="">
-              <div class="article__link__card">
-                <img src="/projekt/assets/images/phone.jpg" alt="phone">
-                <h3>PARTENAIRE</h3>
-                <p>
-                  Expertiese compatible a partir de 99€/mois
-                </p>
-              </div>
-            </a>
-          </article>
-          <article class="article">
-            <a class="article__link" href="">
-              <div class="article__link__card">
-                <img src="/projekt/assets/images/phone.jpg" alt="phone">
-                <h3>PARTENAIRE</h3>
-                <p>
-                  Expertiese compatible a partir de 99€/mois
-                </p>
-              </div>
-            </a>
-          </article>
+          ' . $svijet . '
         </div>
       </section>
       <section class="section">
@@ -152,50 +112,7 @@ echo '<!DOCTYPE html>
           <h2>EKONOMIJA</h2>
         </header>
         <div class="article-container">
-          <article class="article">
-            <a class="article__link" href="">
-              <div class="article__link__card">
-                <img src="/projekt/assets/images/pinault.jpg" alt="pinault">
-                <h3>"ONE PLANET LAB"</h3>
-                <p>
-                  Transition ecologique: Macron charge Pinault de mobiliser l\'industrie de la mode
-                </p>
-              </div>
-            </a>
-          </article>
-          <article class="article">
-            <a class="article__link" href="">
-              <div class="article__link__card">
-                <img src="/projekt/assets/images/whatsapp.jpg" alt="whatsapp">
-                <h3>CONCURRENCE</h3>
-                <p>
-                  Le fondateour de Telegram enfonce WhatsApp, victime d\'une nouvelle faille
-                </p>
-              </div>
-            </a>
-          </article>
-          <article class="article">
-            <a class="article__link" href="">
-              <div class="article__link__card">
-                <img src="/projekt/assets/images/zuck.jpg" alt="zuck">
-                <h3>LE DOSSIER DE L\'EXPRESS</h3>
-                <p>
-                  Le veritable inventeur de "The Face Book" veut voir "Zuckerberg en prison"
-                </p>
-              </div>
-            </a>
-          </article>
-          <article class="article">
-            <a class="article__link" href="">
-              <div class="article__link__card">
-                <img src="/projekt/assets/images/zuck.jpg" alt="zuck">
-                <h3>LE DOSSIER DE L\'EXPRESS</h3>
-                <p>
-                  Le veritable inventeur de "The Face Book" veut voir "Zuckerberg en prison"
-                </p>
-              </div>
-            </a>
-          </article>
+        ' . $ekonomija . '
         </div>
       </section>
     </main>
