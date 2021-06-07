@@ -16,7 +16,7 @@ if(
     $category = $_POST['category'];
     $this_date = date("Y/m/d H:i:s");
     
-    $target_dir = "./uploads/images/";
+    $target_dir = "/projekt/uploads/images/";
 
     //------------------------------------------------------------------------------
 

@@ -4,7 +4,7 @@ include './config/connect.php';
 
 $MAX_LISTINGS = 8;
 
-$query = "SELECT * FROM vijesti";
+$query = "SELECT * FROM vijesti ORDER BY id DESC";
 
 $result = $conn->query($query);
 
@@ -38,7 +38,7 @@ $ekonomija = '';
 if(!empty($vijesti)) {
   for($i = 0; $i < count($vijesti); ++$i) {
     $temp = '<article class="article">
-    <a class="article__link" href="">
+    <a class="article__link" href="' . './pages/page/clanak.php?id=' . $vijesti[$i]['id'] . '' . '">
       <div class="article__link__card">
         <img src="' . $vijesti[$i]['slika'] . '" alt="grains">
         <h3>' . $vijesti[$i]['naslov'] . '</h3>

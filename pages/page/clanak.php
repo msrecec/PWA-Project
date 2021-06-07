@@ -1,4 +1,49 @@
-<!DOCTYPE html>
+<?php
+include '../../config/connect.php';
+
+if(!isset($_GET['id'])) {
+  $conn->close();
+  header("Location: http://localhost/projekt/index.php");
+}
+
+$query = "SELECT * FROM vijesti WHERE id = ?";
+
+$id = intval($_GET['id']);
+
+$stmt = $conn->prepare($query);
+
+$stmt->bind_param("i", $id);
+
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$stmt->close();
+
+// in case of error redirrect
+
+if(!$result) {
+  $conn->close();
+  header("Location: http://localhost/projekt/index.php");
+}
+
+$vijesti;
+
+if(mysqli_num_rows($result) == 0) {
+  $conn->close();
+  header("Location: http://localhost/projekt/index.php");
+} else {
+  $vijesti = mysqli_fetch_array($result);
+}
+
+if(strcmp($vijesti['arhiva'], 1) === 0) {
+  $conn->close();
+  header("Location: http://localhost/projekt/index.php");
+}
+
+$conn->close();
+
+echo '<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +57,7 @@
   <link rel="stylesheet" href="../../css/navigation.css">
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="./css/page.css">
-  <title>L'Express</title>
+  <title>L\'Express</title>
   <style>
   </style>
 </head>
@@ -42,46 +87,40 @@
       <section class="TheSection">
         <header class="TheSection__header">
           <span class="TheSection__header__span-category">MONDE</span>
-          <h1 class="TheSection__header__title">Royaume- Uni: le pro-Brexit Boris Johnson candidat au poste de Premier
-            ministre</h1>
-          <span class="TheSection__header__span-timestamp">publie le 16/05/2019 a 19:35</span>
+          <h1 class="TheSection__header__title">' . $vijesti['naslov'] . '</h1>
+          <span class="TheSection__header__span-timestamp">' . $vijesti['datum'] . '</span>
         </header>
         <figure class="TheSection__figure">
-          <img class="TheSection__figure__img" src="/projekt/assets/images/boris.jpg" alt="">
+          <img class="TheSection__figure__img" src="' . $vijesti['slika'] . '" alt="">
         </figure>
         <article class="TheSection__article">
-          <h3>L'ancien maire de Londres avait refuse de prendre le poste en 2016, apres la campagne pour le referendum
-            ou il est accuse d'avoir induit les electeurs en erreur.</h3>
+          <h3>' . $vijesti['sazetak'] . '</h3>
 
-          <p>Trois ans apres y avoir renonce une premiere fois, l'ancien ministre des Affaires etrangeres britannique
-            Boris Johnson a confirme ce jeudi qu'il serait candidat au poste de Premier ministre quand Theresa May
-            quitterait ses fonctions.
+          <p>
             <br>
             <br>
-            "Bien sur que je vais y aller", a declare ce fervent defenseur du Brexit lors d'un evenement reunissant le
-            monde des affaires a Manchester, dans le nord-ouest de l'Angleterre, confirmant ce que la pluparl de ses
-            collegues conservateurs et des commentateurs politiques supposaient.
+            ' . $vijesti['tekst'] . '
           </p>
         </article>
       </section>
     </main>
   </div>
   <footer id="TheFooter">
-    <p>Les sites du reseau Groupe L'Epress: Food avec Mycuisine.fr</p>
+    <p>Les sites du reseau Groupe L\'Epress: Food avec Mycuisine.fr</p>
   </footer>
   <script>
+  var height = $("#TheHeader").height();
 
-    var height = $('#TheHeader').height();
-
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > height) {
-        $('#navigation-container').addClass('fixed');
-      } else {
-        $('#navigation-container').removeClass('fixed');
-      }
-    })
-
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > height) {
+      $("#navigation-container").addClass("fixed");
+    } else {
+      $("#navigation-container").removeClass("fixed");
+    }
+  })
   </script>
 </body>
 
-</html>
+</html>'
+
+?>
