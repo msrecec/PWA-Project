@@ -4,7 +4,7 @@ include '/xampp/htdocs/projekt/config/connect.php';
 if(isset($_POST['name'])&&isset($_POST['lastname'])&&isset($_POST['username'])&&isset($_POST['password'])) {
   session_start();
 
-  $query = 'SELECT * FROM korisnik WHERE username = ?';
+  $query = 'SELECT * FROM korisnik WHERE korisnicko_ime = ?';
   
   $stmt = $conn->prepare($query);
 
@@ -39,6 +39,11 @@ if(isset($_POST['name'])&&isset($_POST['lastname'])&&isset($_POST['username'])&&
   if(!$stmt->execute()) {
     die('Server error while querying the DB');
   }
+
+  $stmt->close();
+  $conn->close();
+  
+  header('Location: http://localhost/projekt/pages/registracija/registracija-uspjeh.php');
 
 } else {
   die('Registration failed error: Not passed all parameters');
