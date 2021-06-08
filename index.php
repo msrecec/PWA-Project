@@ -104,7 +104,7 @@ echo '<!DOCTYPE html>
             <a class="nav__list__li__a" href="/projekt/pages/admin/administracija.php">ADMINISTRACIJA</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="/projekt/pages/registracija/registracija.php">registracija</a>
+            <a class="nav__list__li__a" href="/projekt/pages/registracija/registracija.php">REGISTRACIJA</a>
           </li>
         </ul>
       </div>

@@ -48,61 +48,52 @@
       <div class="form-container">
         <form id="form" enctype="multipart/form-data" class="TheForm" action="skripta.php" method="POST">
           <div class="form__item">
-            <label for="title">Naslov vijesti
+            <label for="name">Ime
               <div class="form__item__field">
-                <p id="title-alert" style="visibility:hidden; color:red;">Naslov vijesti mora biti iznedju 5 i 30
+                <p id="name-alert" style="display:none; color:red;">Ime mora biti iznedju 5 i 32
                   znakova</p>
-                <input id="title" class="form__item__field__text" type="text" name="title" id="title">
+                <input style="margin: 5px 0px 5px 0px" id="name" class="form__item__field__text" type="text" name="name"
+                  id="name">
               </div>
             </label>
-          </div>
-          <div class="form__item">
-            <label for="about">Kratki sadržaj vijesti (do 50 znakova)
+            <label for="lastname">Prezime
               <div class="form__item__field">
-                <p id="about-alert" style="visibility:hidden; color:red;">Kratki sadrzaj mora biti iznedju 10 i 50
+                <p id="lastname-alert" style="display:none; color:red;">Prezime mora biti iznedju 5 i 32
                   znakova</p>
-                <textarea id="about" class="form__item__field__text" rows="10" name="about" id="about"></textarea>
+                <input style="margin: 5px 0px 5px 0px" id="lastname" class="form__item__field__text" type="text"
+                  name="lastname" id="lastname">
               </div>
             </label>
-          </div>
-          <div class="form__item">
-            <label for="content">Sadržaj vijesti
+            <label for="username">Korisničko ime
               <div class="form__item__field">
-                <p id="content-alert" style="visibility:hidden; color:red;">Sadrzaj mora biti unesen</p>
-                <textarea id="content" class="form__item__field__text" rows="20" name="content" id="content"></textarea>
+                <p id="username-alert" style="display:none; color:red;">Korisničko ime mora biti iznedju 5 i 32
+                  znakova</p>
+                <p id="usernameTaken-alert" style="display:none; color:red;">Korisničko ime se koristi</p>
+                <input style="margin: 5px 0px 5px 0px" id="username" class="form__item__field__text" type="text"
+                  name="username" id="username">
               </div>
             </label>
-          </div>
-          <div class="form__item">
-            <label for="photo">Slika:
-              <p id="photo-alert" style="visibility:hidden; color:red;">Slika mora biti unesena</p>
+            <label for="password">Lozinka
               <div class="form__item__field">
-                <input type="file" accept="image/jpeg,image/gif,image/png" name="photo" id="photo">
+                <p id="password-alert" style="display:none; color:red;">Lozinka mora biti iznedju 5 i 32
+                  znakova</p>
+                <input style="margin: 5px 0px 5px 0px" id="password" class="form__item__field__text" type="password"
+                  name="password" id="password">
               </div>
             </label>
-          </div>
-          <div class="form__item">
-            <label for="category">Kategorija vijesti
-              <p id="category-alert" style="visibility:hidden; color:red;">Kategorija mora biti odabrana</p>
+            <label for="passwordRepeat">Ponovljena Lozinka
               <div class="form__item__field">
-                <select id="category" name="category" id="category" class="form__item__field__select">
-                  <option disabled selected value> -- odaberite kategoriju -- </option>
-                  <option value="SVIJET">Svijet</option>
-                  <option value="EKONOMIJA">Ekonomija</option>
-                </select>
+                <p id="passwordRepeat-alert" style="display:none; color:red;">Lozinka mora biti iznedju 5 i 32
+                  znakova</p>
+                <p id="passwordDuplicate-alert" style="display:none; color:red;">Lozinke moraju biti iste</p>
+                <input style="margin: 5px 0px 5px 0px" id="password" class="form__item__field__text" type="password"
+                  name="password" id="password">
               </div>
             </label>
           </div>
           <div class="form__item">
-            <label for="archive">Spremiti u arhivu:
-              <div class="form__item__field">
-                <input type="checkbox" name="archive" id="archive">
-              </div>
-            </label>
-          </div>
-          <div class="form__item">
-            <a href="/projekt/index.php"><button value="Poništi">Poništi</button></a>
-            <button type="submit" value="Prihvati">Prihvati</button>
+            <button type="reset" id="cancel" value="Poništi">Poništi</button>
+            <button type="submit" id="submit" value="Prihvati">Registriraj se</button>
           </div>
         </form>
       </div>
@@ -112,90 +103,47 @@
     <p>Les sites du reseau Groupe L'Epress: Food avec Mycuisine.fr</p>
   </footer>
   <script>
-  const category = document.getElementById("category");
   const form = document.getElementById("form");
-  const photo = document.getElementById("photo");
-  const content = document.getElementById("content");
-  const about = document.getElementById("about");
-  const title = document.getElementById("title");
+  const name = document.getElementById("name");
+  const lastname = document.getElementById("lastname");
+  const password = document.getElementById("password");
+  const passwordRepeat = document.getElementById("passwordRepeat");
 
   // adding form validation
 
   form.addEventListener("submit", (event) => {
     let flag = false;
 
-    const titleAlert = document.getElementById("title-alert");
-    const aboutAlert = document.getElementById("about-alert");
-    const contentAlert = document.getElementById("content-alert");
-    const photoAlert = document.getElementById("photo-alert");
-    const categoryAlert = document.getElementById("photo-alert");
+    const nameAlert = document.getElementById("name-alert");
+    const lastNameAlert = document.getElementById("lastName-alert");
 
-    category.style.borderColor = "";
-    category.style.borderStyle = "";
+    name.style.borderColor = "";
+    name.style.borderStyle = "";
 
-    title.style.borderColor = "";
-    title.style.borderStyle = "";
+    lastname.style.borderColor = "";
+    lastname.style.borderStyle = "";
 
-    about.style.borderColor = "";
-    about.style.borderStyle = "";
+    nameAlert.style.display = "none";
+    lastNameAlert.style.display = "none";
 
-    content.style.borderColor = "";
-    content.style.borderStyle = "";
-
-    photo.style.borderColor = "";
-    photo.style.borderStyle = "";
-
-    titleAlert.style.visibility = "hidden";
-    aboutAlert.style.visibility = "hidden";
-    contentAlert.style.visibility = "hidden";
-    photoAlert.style.visibility = "hidden";
-
-    if (!title.value || title.value.trim().length < 5 || title.value.trim().length > 30) {
+    if (!name.value || name.value.trim().length < 5 || name.value.trim().length > 32) {
       flag = true;
 
-      titleAlert.style.visibility = "visible";
+      nameAlert.style.display = "block";
 
-      title.style.borderColor = "red";
-      title.style.borderStyle = "dotted";
+      name.style.borderColor = "red";
+      name.style.borderStyle = "dotted";
 
     }
 
-    if (!about.value || about.value.trim().length < 10 || about.value.trim().length > 50) {
+    if (!lastname.value || lastname.value.trim().length < 5 || lastname.value.trim().length > 32) {
       flag = true;
 
-      aboutAlert.style.visibility = "visible";
+      lastnameAlert.style.display = "block";
 
-      about.style.borderColor = "red";
-      about.style.borderStyle = "dotted";
+      lastname.style.borderColor = "red";
+      lastname.style.borderStyle = "dotted";
 
-    }
-
-    if (!content.value || content.value.trim().length === 0) {
-      flag = true;
-
-      contentAlert.style.visibility = "visible";
-
-      content.style.borderColor = "red";
-      content.style.borderStyle = "dotted";
-
-    }
-
-    if (photo.value == "") {
-      flag = true;
-
-      photoAlert.style.visibility = "visible";
-
-      photo.style.borderColor = "red";
-      photo.style.borderStyle = "dotted";
-    }
-
-    if (category.value == false) {
-      flag = true;
-
-      categoryAlert.style.visibility = "visible";
-
-      category.style.borderColor = "red";
-      category.style.borderStyle = "dotted";
     }
 
     if (flag) {
