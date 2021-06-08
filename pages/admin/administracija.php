@@ -88,7 +88,7 @@ echo '<!DOCTYPE html>
       <div id="navigation-container">
         <ul class="nav__list">
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="../../index.php">HOME</a>
+            <a class="nav__list__li__a" href="/projekt/index.php">HOME</a>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/listings/categories.php?kategorija=SVIJET">SVIJET</a>
@@ -101,6 +101,9 @@ echo '<!DOCTYPE html>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/admin/administracija.php">ADMINISTRACIJA</a>
+          </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="/projekt/pages/registracija/registracija.php">REGISTRACIJA</a>
           </li>
         </ul>
       </div>
