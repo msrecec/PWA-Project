@@ -90,7 +90,7 @@
             </label>
           </div>
           <div class="form__item">
-            <button type="reset" value="Poništi">Poništi</button>
+            <a href="/projekt/index.php"><button value="Poništi">Poništi</button></a>
             <button type="submit" value="Prihvati">Prihvati</button>
           </div>
         </form>
