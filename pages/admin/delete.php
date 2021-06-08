@@ -18,7 +18,7 @@ if(isset($_GET['id'])) {
   if(!$stmt->execute()) {
     $stmt->close();
     $conn->close();
-    header("Location: http://localhost/projekt/index.php");
+    header("Location: http://localhost/projekt/pages/admin/administracija.php");
   }
 
   $result = $stmt->get_result();
@@ -29,7 +29,7 @@ if(isset($_GET['id'])) {
 
     $conn->close();
 
-    header("Location: http://localhost/projekt/index.php");
+    header("Location: http://localhost/projekt/pages/admin/administracija.php");
 
   }
     
@@ -51,10 +51,10 @@ if(isset($_GET['id'])) {
 
   $conn->close();
   
-  header("Location: http://localhost/projekt/index.php");
+  header("Location: http://localhost/projekt/pages/admin/administracija.php");
     
 } else {
   $conn->close();
-  header("Location: http://localhost/projekt/index.php");
+  header("Location: http://localhost/projekt/pages/admin/administracija.php");
 }
 ?>
