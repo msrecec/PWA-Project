@@ -46,7 +46,7 @@ if(isset($_POST['name'])&&isset($_POST['lastname'])&&isset($_POST['username'])&&
   header('Location: http://localhost/projekt/pages/registracija/registracija-uspjeh.php');
 
 } else {
-  die('Registration failed error: Not passed all parameters');
+  header('Location: http://localhost/projekt/pages/registracija/registracija-neuspjeh.php');
 }
 
 

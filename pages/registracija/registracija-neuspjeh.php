@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>Successful registration, redirecting to the frontpage <span id="timeout"></span></h1>
+  <h1>Unsuccessful registration - there was an error, redirecting to the frontpage <span id="timeout"></span></h1>
   <script type="text/javascript">
   const timeout = document.getElementById("timeout");
   let count = 4;
