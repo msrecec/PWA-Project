@@ -46,7 +46,7 @@
     </nav>
     <main id="TheMain">
       <div class="form-container">
-        <form id="form" enctype="multipart/form-data" class="TheForm" action="skripta.php" method="POST">
+        <form id="form" class="TheForm" action="skripta.php" method="POST">
           <div class="form__item">
             <label for="name">Ime
               <div class="form__item__field">
@@ -61,16 +61,16 @@
                 <p id="lastname-alert" style="display:none; color:red;">Prezime mora biti iznedju 5 i 32
                   znakova</p>
                 <input style="margin: 5px 0px 5px 0px" id="lastname" class="form__item__field__text" type="text"
-                  name="lastname" id="lastname">
+                  name="lastname">
               </div>
             </label>
             <label for="username">Korisničko ime
               <div class="form__item__field">
                 <p id="username-alert" style="display:none; color:red;">Korisničko ime mora biti iznedju 5 i 32
                   znakova</p>
-                <p id="usernameTaken-alert" style="display:none; color:red;">Korisničko ime se koristi</p>
+                <p id="username-taken-alert" style="display:none; color:red;">Korisničko ime se koristi</p>
                 <input style="margin: 5px 0px 5px 0px" id="username" class="form__item__field__text" type="text"
-                  name="username" id="username">
+                  name="username">
               </div>
             </label>
             <label for="password">Lozinka
@@ -78,16 +78,16 @@
                 <p id="password-alert" style="display:none; color:red;">Lozinka mora biti iznedju 5 i 32
                   znakova</p>
                 <input style="margin: 5px 0px 5px 0px" id="password" class="form__item__field__text" type="password"
-                  name="password" id="password">
+                  name="password">
               </div>
             </label>
             <label for="passwordRepeat">Ponovljena Lozinka
               <div class="form__item__field">
-                <p id="passwordRepeat-alert" style="display:none; color:red;">Lozinka mora biti iznedju 5 i 32
+                <p id="password-repeat-alert" style="display:none; color:red;">Lozinka mora biti iznedju 5 i 32
                   znakova</p>
-                <p id="passwordDuplicate-alert" style="display:none; color:red;">Lozinke moraju biti iste</p>
-                <input style="margin: 5px 0px 5px 0px" id="password" class="form__item__field__text" type="password"
-                  name="password" id="password">
+                <p id="password-duplicate-alert" style="display:none; color:red;">Lozinke moraju biti iste</p>
+                <input style="margin: 5px 0px 5px 0px" id="passwordRepeat" class="form__item__field__text"
+                  type="password" name="passwordRepeat">
               </div>
             </label>
           </div>
@@ -105,7 +105,8 @@
   <script>
   const form = document.getElementById("form");
   const name = document.getElementById("name");
-  const lastname = document.getElementById("lastname");
+  const lastName = document.getElementById("lastname");
+  const userName = document.getElementById("username");
   const password = document.getElementById("password");
   const passwordRepeat = document.getElementById("passwordRepeat");
 
@@ -115,16 +116,33 @@
     let flag = false;
 
     const nameAlert = document.getElementById("name-alert");
-    const lastNameAlert = document.getElementById("lastName-alert");
+    const lastNameAlert = document.getElementById("lastname-alert");
+    const userNameAlert = document.getElementById("username-alert");
+    const passwordAlert = document.getElementById("password-alert");
+    const passwordRepeatAlert = document.getElementById("password-repeat-alert");
+    const passwordDuplicateAlert = document.getElementById("password-duplicate-alert");
 
     name.style.borderColor = "";
     name.style.borderStyle = "";
 
-    lastname.style.borderColor = "";
-    lastname.style.borderStyle = "";
+    lastName.style.borderColor = "";
+    lastName.style.borderStyle = "";
+
+    userName.style.borderColor = "";
+    userName.style.borderStyle = "";
+
+    password.style.borderColor = "";
+    password.style.borderStyle = "";
+
+    passwordRepeat.style.borderColor = "";
+    passwordRepeat.style.borderStyle = "";
 
     nameAlert.style.display = "none";
     lastNameAlert.style.display = "none";
+    userNameAlert.style.display = "none";
+    passwordAlert.style.display = "none";
+    passwordRepeatAlert.style.display = "none";
+    passwordDuplicateAlert.style.display = "none";
 
     if (!name.value || name.value.trim().length < 5 || name.value.trim().length > 32) {
       flag = true;
@@ -136,20 +154,58 @@
 
     }
 
-    if (!lastname.value || lastname.value.trim().length < 5 || lastname.value.trim().length > 32) {
+    if (!lastName.value || lastName.value.trim().length < 5 || lastName.value.trim().length > 32) {
       flag = true;
 
-      lastnameAlert.style.display = "block";
+      lastNameAlert.style.display = "block";
 
-      lastname.style.borderColor = "red";
-      lastname.style.borderStyle = "dotted";
+      lastName.style.borderColor = "red";
+      lastName.style.borderStyle = "dotted";
+
+    }
+
+    if (!userName.value || userName.value.trim().length < 5 || userName.value.trim().length > 32) {
+      flag = true;
+
+      userNameAlert.style.display = "block";
+
+      userName.style.borderColor = "red";
+      userName.style.borderStyle = "dotted";
+
+    }
+
+    if (!password.value || password.value.trim().length < 5 || password.value.trim().length > 32) {
+      flag = true;
+
+      passwordAlert.style.display = "block";
+
+      password.style.borderColor = "red";
+      password.style.borderStyle = "dotted";
+
+    }
+
+    if (!passwordRepeat.value || passwordRepeat.value.trim().length < 5 || passwordRepeat.value.trim().length >
+      32) {
+      flag = true;
+
+      passwordRepeatAlert.style.display = "block";
+
+      passwordRepeat.style.borderColor = "red";
+      passwordRepeat.style.borderStyle = "dotted";
+
+    }
+
+    if (password && passwordRepeat && password.value !== passwordRepeat.value) {
+      flag = true;
+
+      passwordDuplicateAlert.style.display = "block";
 
     }
 
     if (flag) {
       event.preventDefault();
-      return;
     }
+
   });
 
   var height = $('#TheHeader').height();
