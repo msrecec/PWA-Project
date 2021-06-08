@@ -3,7 +3,7 @@
 // in case id was not passed
 
 if(!isset($_GET['id'])) {
-  header("Location: http://localhost/projekt/index.php" );
+  header("Location: http://localhost/projekt/index.php");
 }
 
 $id = intval($_GET['id']);
@@ -79,6 +79,11 @@ echo '<!DOCTYPE html>
       <div class="form-container">
         <form enctype="multipart/form-data" class="TheForm" action="editSkripta.php" method="POST">
           <div class="form__item">
+            <label hidden for="id">Id
+              <div class="form__item__field">
+                <input class="form__item__field__text" type="text" name="id" id="id" value="' . $row['id'] . '">
+              </div>
+            </label>
             <label for="title">Naslov vijesti
               <div class="form__item__field">
                 <input class="form__item__field__text" type="text" name="title" id="title" value="' . $row['naslov'] . '">

@@ -33,7 +33,7 @@
             <a class="nav__list__li__a" href="../listings/categories.php?kategorija=EKONOMIJA">EKONOMIJA</a>
           </li>
           <li class="nav__list__li">
-            <a class="nav__list__li__a" href="/projekt/pages/input/unos.html">UNOS</a>
+            <a class="nav__list__li__a" href="/projekt/pages/input/unos.php">UNOS</a>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/admin/administracija.php">ADMINISTRACIJA</a>
