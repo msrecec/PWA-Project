@@ -1,6 +1,7 @@
 <?php
 
 include "../../config/connect.php";
+include "../../uploads/upload.php";
 
 if(isset($_GET['id'])) {
 
@@ -36,6 +37,10 @@ if(isset($_GET['id'])) {
 
   $id = intval($_GET['id']);
 
+  // delete an img from fs
+
+  deleteImgFromFS($id);
+
   // delete row from database
 
   $stmt = $conn->prepare("DELETE FROM vijesti WHERE id = ?");
@@ -44,18 +49,12 @@ if(isset($_GET['id'])) {
 
   $stmt->execute();
 
-  // delete an img from fs
-
-  $slika = $row['slika'];
-
-  unlink('C:/xampp/htdocs'.$slika);
-
   $conn->close();
   
   header("Location: http://localhost/projekt/index.php");
     
 } else {
-  header("Location: http://localhost/projekt/index.php");
   $conn->close();
+  header("Location: http://localhost/projekt/index.php");
 }
 ?>
