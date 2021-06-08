@@ -9,7 +9,7 @@ isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
 !isset($_POST['archived'])&&
-!is_uploaded_file($_FILES['photo']['tmp_name'])) {
+!fileUploaded('photo')) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
   $about = $_POST['about'];
@@ -29,7 +29,7 @@ else if (
   isset($_POST['content'])&&
   isset($_POST['category'])&&
   isset($_POST['archived'])&&
-  !is_uploaded_file($_FILES['photo']['tmp_name'])) {
+  !fileUploaded('photo')) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
   $about = $_POST['about'];
@@ -48,7 +48,7 @@ isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
 !isset($_POST['archived'])&&
-is_uploaded_file($_FILES['photo']['tmp_name'])) {
+fileUploaded('photo')) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
   $about = $_POST['about'];
@@ -76,7 +76,7 @@ isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
 isset($_POST['archived'])&&
-is_uploaded_file($_FILES['photo']['tmp_name'])) {
+fileUploaded('photo')) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
   $about = $_POST['about'];
@@ -168,4 +168,17 @@ function insertMetadata($id, $title, $about, $content, $category, $archived, $sl
   $conn->autocommit(true);
 
 }
+
+function fileUploaded($formField)
+{
+    if(empty($_FILES)) {
+        return false;       
+    } 
+    $file = $_FILES[$formField];
+    if(!file_exists($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])){
+        return false;
+    }   
+    return true;
+}
+
 ?>
