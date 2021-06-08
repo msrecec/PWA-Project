@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>Unsuccessful registration - there was an error, redirecting to the frontpage
+  <h1>Unsuccessful login - there was an error, redirecting to the frontpage
     <span id="timeout"></span>
   </h1>
   <script type="text/javascript">

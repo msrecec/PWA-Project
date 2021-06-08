@@ -86,6 +86,9 @@ echo '<!DOCTYPE html>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/registracija/registracija.php">REGISTRACIJA</a>
           </li>
+          <li class="nav__list__li">
+          <a class="nav__list__li__a" href="/projekt/pages/prijava/prijava.php">PRIJAVA</a>
+        </li>
         </ul>
       </div>
     </nav>

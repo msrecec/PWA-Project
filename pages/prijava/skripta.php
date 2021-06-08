@@ -1,7 +1,7 @@
 <?php
 include '/xampp/htdocs/projekt/config/connect.php';
 
-if(isset($_POST['name'])&&isset($_POST['lastname'])&&isset($_POST['username'])&&isset($_POST['password'])) {
+if(isset($_POST['username'])&&isset($_POST['password'])) {
   session_start();
 
   $query = 'SELECT * FROM korisnik WHERE korisnicko_ime = ?';
@@ -16,10 +16,12 @@ if(isset($_POST['name'])&&isset($_POST['lastname'])&&isset($_POST['username'])&&
 
   $result = $stmt->get_result();
   
-  if(mysqli_num_rows($result) != 0) {
+  if(mysqli_num_rows($result) == 0) {
+    echo 'User is already registered, redirecting to the frontpage';
+    sleep(3);
     $stmt->close();
     $conn->close();
-    header('Location: http://localhost/projekt/pages/registracija/registracija.php?username-taken=taken');
+    header('Location: http://localhost/projekt/index.php');
   }
 
   $password = password_hash($_POST['password'], CRYPT_BLOWFISH);
