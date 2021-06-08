@@ -9,7 +9,7 @@ isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
 !isset($_POST['archived'])&&
-!isset($_FILES['photo'])) {
+!is_uploaded_file($_FILES['photo']['tmp_name'])) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
   $about = $_POST['about'];
@@ -29,7 +29,7 @@ else if (
   isset($_POST['content'])&&
   isset($_POST['category'])&&
   isset($_POST['archived'])&&
-  !isset($_FILES['photo'])) {
+  !is_uploaded_file($_FILES['photo']['tmp_name'])) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
   $about = $_POST['about'];
@@ -48,7 +48,7 @@ isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
 !isset($_POST['archived'])&&
-isset($_FILES['photo'])) {
+is_uploaded_file($_FILES['photo']['tmp_name'])) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
   $about = $_POST['about'];
@@ -76,7 +76,7 @@ isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
 isset($_POST['archived'])&&
-isset($_FILES['photo'])) {
+is_uploaded_file($_FILES['photo']['tmp_name'])) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
   $about = $_POST['about'];
@@ -127,14 +127,20 @@ function insertMetadata($id, $title, $about, $content, $category, $archived, $sl
     $query = "SELECT * FROM vijesti WHERE id = ?";
   
     $stmt = $conn->prepare($query);
+
+    $stmt->bind_param('i', $id);
   
     $stmt->execute();
   
     $result = $stmt->get_result();
+
+    if($result) {
+      
+      $row = mysqli_fetch_row($result);
+    
+      $slika = $row['slika'];
+    }
   
-    $row = mysqli_fetch_array($result);
-  
-    $slika = $row['slika'];
   }
 
   $query = "UPDATE vijesti SET naslov = ?, sazetak = ?, tekst = ?, kategorija = ?, arhiva = ?, datum = ?, slika = ? WHERE id = ? ";
