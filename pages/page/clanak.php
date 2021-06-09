@@ -87,8 +87,11 @@ echo '<!DOCTYPE html>
             <a class="nav__list__li__a" href="/projekt/pages/registracija/registracija.php">REGISTRACIJA</a>
           </li>
           <li class="nav__list__li">
-          <a class="nav__list__li__a" href="/projekt/pages/prijava/prijava.php">PRIJAVA</a>
-        </li>
+            <a class="nav__list__li__a" href="/projekt/pages/prijava/prijava.php">PRIJAVA</a>
+          </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="http://localhost/projekt/pages/odjava/odjava.php">ODJAVA</a>
+          </li>
         </ul>
       </div>
     </nav>

@@ -1,4 +1,7 @@
 <?php
+session_start();
+if(isset($_SESSION['role']) && strcmp($_SESSION['role'], '1') == 0) {
+
 $target_dir = "/projekt/uploads/images/";
 
 include "../../uploads/upload.php";
@@ -178,5 +181,7 @@ function fileUploaded($formField)
     }  
     return strcmp($_FILES[$formField]['name'], '') !== 0;
 }
-
+} else {
+  header('Location: http://localhost/projekt/pages/forbidden/forbidden.php');
+}
 ?>

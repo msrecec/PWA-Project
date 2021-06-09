@@ -1,4 +1,6 @@
 <?php
+session_start();
+if(isset($_SESSION['role']) && strcmp($_SESSION['role'], '1') == 0) {
 
 // in case id was not passed
 
@@ -77,6 +79,9 @@ echo '<!DOCTYPE html>
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/prijava/prijava.php">PRIJAVA</a>
+          </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="http://localhost/projekt/pages/odjava/odjava.php">ODJAVA</a>
           </li>
         </ul>
       </div>
@@ -258,4 +263,7 @@ echo '<!DOCTYPE html>
 </body>
 
 </html>';
+} else {
+  header('Location: http://localhost/projekt/pages/forbidden/forbidden.php');
+}
 ?>

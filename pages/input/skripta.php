@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+if(isset($_SESSION['role']) && (strcmp($_SESSION['role'], '1') == 0 || strcmp($_SESSION['role'], '0') == 0)) {
 include "../../config/connect.php";
 include "../../uploads/upload.php";
 
@@ -71,5 +72,8 @@ if(
     
     header("Location: http://localhost/projekt/index.php");
     
+}
+} else {
+  header('Location: http://localhost/projekt/pages/forbidden/forbidden.php');
 }
 ?>

@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+session_start();
+if(isset($_SESSION['role']) && (strcmp($_SESSION['role'], '1') == 0 || strcmp($_SESSION['role'], '0') == 0)) {
+echo '<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +15,7 @@
   <link rel="stylesheet" href="../../css/navigation.css">
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="./css/input.css">
-  <title>L'Express</title>
+  <title>L\'Express</title>
   <style>
   </style>
 </head>
@@ -43,6 +46,9 @@
           </li>
           <li class="nav__list__li">
             <a class="nav__list__li__a" href="/projekt/pages/prijava/prijava.php">PRIJAVA</a>
+          </li>
+          <li class="nav__list__li">
+            <a class="nav__list__li__a" href="http://localhost/projekt/pages/odjava/odjava.php">ODJAVA</a>
           </li>
         </ul>
       </div>
@@ -112,7 +118,7 @@
     </main>
   </div>
   <footer id="TheFooter">
-    <p>Les sites du reseau Groupe L'Epress: Food avec Mycuisine.fr</p>
+    <p>Les sites du reseau Groupe L\'Epress: Food avec Mycuisine.fr</p>
   </footer>
   <script>
   const category = document.getElementById("category");
@@ -207,16 +213,20 @@
     }
   });
 
-  var height = $('#TheHeader').height();
+  var height = $(\'#TheHeader\').height();
 
   $(window).scroll(function() {
     if ($(this).scrollTop() > height) {
-      $('#navigation-container').addClass('fixed');
+      $(\'#navigation-container\').addClass(\'fixed\');
     } else {
-      $('#navigation-container').removeClass('fixed');
+      $(\'#navigation-container\').removeClass(\'fixed\');
     }
   })
   </script>
 </body>
 
-</html>
+</html>';
+} else {
+  header('Location: http://localhost/projekt/pages/forbidden/forbidden.php');
+}
+?>

@@ -24,7 +24,7 @@ if(isset($_POST['name'])&&isset($_POST['lastname'])&&isset($_POST['username'])&&
 
   $password = password_hash($_POST['password'], CRYPT_BLOWFISH);
 
-  $query = "INSERT INTO korisnik (ime, prezime, korisnicko_ime, lozinka, razina) VALUES (?, ?, ?, ?, 1)";
+  $query = "INSERT INTO korisnik (ime, prezime, korisnicko_ime, lozinka, razina) VALUES (?, ?, ?, ?, 0)";
 
   $stmt = $conn->prepare($query);
 
