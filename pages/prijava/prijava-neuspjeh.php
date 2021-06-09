@@ -1,3 +1,5 @@
+<?php
+echo '
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,4 +29,5 @@
   </script>
 </body>
 
-</html>
+</html>';
+?>
