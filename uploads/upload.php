@@ -1,5 +1,11 @@
 <?php
-  function uploadHandler($target_file, $last_id) {
+
+/**
+ * Uploads image to file system
+ * 
+ */
+
+function uploadHandler($target_file, $last_id) {
 
   //------------------------------------------------------------------------------
 
