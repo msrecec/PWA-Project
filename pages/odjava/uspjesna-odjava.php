@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>Logging out and redirecting to the frontpage: <span id="timeout"></span></h1>
+  <h1>Logged out sucessfully - redirecting to the frontpage: <span id="timeout"></span></h1>
   <script type="text/javascript">
   const timeout = document.getElementById("timeout");
   let count = 4;
@@ -26,4 +26,3 @@
 </body>
 
 </html>;
-?>
