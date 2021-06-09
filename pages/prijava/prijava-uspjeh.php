@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?php
+session_start();
+if(!(isset($_SESSION['username'])&&isset($_SESSION['role'])&&isset($_SESSION['id']))) {
+  header('Location: http://localhost/projekt/pages/prijava/prijava-neuspjeh.php');
+}
+
+$username = $_SESSION['username'];
+
+echo '<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,9 +17,7 @@
 </head>
 
 <body>
-  <h1>Unsuccessful registration - there was an error, redirecting to the frontpage:
-    <span id="timeout"></span>
-  </h1>
+  <h1>Welcome ' . $username . ' redirecting to the frontpage: <span id="timeout"></span></h1>
   <script type="text/javascript">
   const timeout = document.getElementById("timeout");
   let count = 4;
@@ -27,4 +33,5 @@
   </script>
 </body>
 
-</html>
+</html>';
+?>

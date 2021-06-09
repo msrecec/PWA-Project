@@ -17,36 +17,32 @@ if(isset($_POST['username'])&&isset($_POST['password'])) {
   $result = $stmt->get_result();
   
   if(mysqli_num_rows($result) == 0) {
-    echo 'User is already registered, redirecting to the frontpage';
-    sleep(3);
     $stmt->close();
     $conn->close();
-    header('Location: http://localhost/projekt/index.php');
+    header('Location: http://localhost/projekt/pages/prijava/prijava.php?username-or-password-alert=false');
+    die();
   }
 
-  $password = password_hash($_POST['password'], CRYPT_BLOWFISH);
+  $array = mysqli_fetch_array($result);
 
-  $query = "INSERT INTO korisnik (ime, prezime, korisnicko_ime, lozinka, razina) VALUES (?, ?, ?, ?, 1)";
-
-  $stmt = $conn->prepare($query);
-
-  $stmt->bind_param('ssss', $_POST['name'], $_POST['lastname'], $_POST['username'], $password);
-
-  $_SESSION['username'] = $_POST['username'];
-  $_SESSION['password'] = $password;
-  $_SESSION['role'] = 'user';
+  if(!password_verify($_POST['password'], $array['lozinka'])) {
+    $stmt->close();
+    $conn->close();
+    header('Location: http://localhost/projekt/pages/prijava/prijava.php?username-or-password-alert=false');
+    die();
+  }
   
-  if(!$stmt->execute()) {
-    die('Server error while querying the DB');
-  }
+  $_SESSION['id'] = $array['id'];
+  $_SESSION['username'] = $array['korisnicko_ime'];
+  $_SESSION['role'] = strval($array['razina']);
 
   $stmt->close();
   $conn->close();
   
-  header('Location: http://localhost/projekt/pages/registracija/registracija-uspjeh.php');
+  header('Location: http://localhost/projekt/pages/prijava/prijava-uspjeh.php');
 
 } else {
-  header('Location: http://localhost/projekt/pages/registracija/registracija-neuspjeh.php');
+  header('Location: http://localhost/projekt/pages/prijava/prijava-neuspjeh.php');
 }
 
 
