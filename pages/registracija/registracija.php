@@ -65,7 +65,7 @@ echo '<!DOCTYPE html>
           <div class="form__item">
             <label for="name">Ime
               <div class="form__item__field">
-                <p id="name-alert" style="display:none; color:red;">Ime mora biti iznedju 5 i 32
+                <p id="name-alert" style="display:none; color:red;">Ime mora biti između 5 i 32
                   znakova</p>
                 <input style="margin: 5px 0px 5px 0px" id="name" class="form__item__field__text" type="text" name="name"
                   id="name">
@@ -73,7 +73,7 @@ echo '<!DOCTYPE html>
             </label>
             <label for="lastname">Prezime
               <div class="form__item__field">
-                <p id="lastname-alert" style="display:none; color:red;">Prezime mora biti iznedju 5 i 32
+                <p id="lastname-alert" style="display:none; color:red;">Prezime mora biti između 5 i 32
                   znakova</p>
                 <input style="margin: 5px 0px 5px 0px" id="lastname" class="form__item__field__text" type="text"
                   name="lastname">
@@ -81,7 +81,7 @@ echo '<!DOCTYPE html>
             </label>
             <label for="username">Korisničko ime
               <div class="form__item__field">
-                <p id="username-alert" style="display:none; color:red;">Korisničko ime mora biti iznedju 5 i 32
+                <p id="username-alert" style="display:none; color:red;">Korisničko ime mora biti između 5 i 32
                   znakova</p>
                 '. $usernameTaken .'
                 <input style="margin: 5px 0px 5px 0px" id="username" class="form__item__field__text" type="text"
@@ -90,7 +90,7 @@ echo '<!DOCTYPE html>
             </label>
             <label for="password">Lozinka
               <div class="form__item__field">
-                <p id="password-alert" style="display:none; color:red;">Lozinka mora biti iznedju 5 i 32
+                <p id="password-alert" style="display:none; color:red;">Lozinka mora biti između 5 i 32
                   znakova</p>
                 <input style="margin: 5px 0px 5px 0px" id="password" class="form__item__field__text" type="password"
                   name="password">
@@ -98,7 +98,7 @@ echo '<!DOCTYPE html>
             </label>
             <label for="passwordRepeat">Ponovljena Lozinka
               <div class="form__item__field">
-                <p id="password-repeat-alert" style="display:none; color:red;">Lozinka mora biti iznedju 5 i 32
+                <p id="password-repeat-alert" style="display:none; color:red;">Lozinka mora biti između 5 i 32
                   znakova</p>
                 <p id="password-duplicate-alert" style="display:none; color:red;">Lozinke moraju biti iste</p>
                 <input style="margin: 5px 0px 5px 0px" id="passwordRepeat" class="form__item__field__text"

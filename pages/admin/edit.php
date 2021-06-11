@@ -97,7 +97,7 @@ echo '<!DOCTYPE html>
             </label>
             <label for="title">Naslov vijesti
               <div class="form__item__field">
-                <p id="title-alert" style="visibility:hidden; color:red;">Naslov vijesti mora biti iznedju 5 i 30
+                <p id="title-alert" style="visibility:hidden; color:red;">Naslov vijesti mora biti između 5 i 30
                 znakova</p>
                 <input class="form__item__field__text" type="text" name="title" id="title" value="' . $row['naslov'] . '">
               </div>
@@ -106,7 +106,7 @@ echo '<!DOCTYPE html>
           <div class="form__item">
             <label for="about">Kratki sadržaj vijesti (do 50 znakova)
               <div class="form__item__field">
-              <p id="about-alert" style="visibility:hidden; color:red;">Kratki sadrzaj mora biti iznedju 10 i 50
+              <p id="about-alert" style="visibility:hidden; color:red;">Kratki sadrzaj mora biti između 10 i 50
               znakova</p>
               <textarea class="form__item__field__text" rows="10" name="about" id="about">'. $row['sazetak'] .'</textarea>
               </div>
