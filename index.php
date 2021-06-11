@@ -2,39 +2,48 @@
 
 include './config/connect.php';
 
-$MAX_LISTINGS = 8;
+/**
+ * Queries for a specific Category and returns first for results ordered by id
+ * 
+ */
 
-$query = "SELECT * FROM vijesti ORDER BY id DESC";
+function queryForCategory($conn, $query) {
 
-$result = $conn->query($query);
+  $result = $conn->query($query);
 
-if(!$result) die('Error while querying');
+  if(!$result) die('Error while querying');
+
+  $vijesti = array();
+
+  if(mysqli_num_rows($result) == 0) {
+    // $conn->close();
+    // die('no content');
+  } else {
+    for($i = 0; $row = mysqli_fetch_array($result); ++$i) {
+      if ($row['arhiva'] === '1') {
+        $i--;
+        continue;
+      }
+      $vijesti[$i] = $row;
+      $vijesti[$i]['id'] = $row['id'];
+      $vijesti[$i]['datum'] = $row['datum'];
+      $vijesti[$i]['naslov'] = $row['naslov'];
+      $vijesti[$i]['sazetak'] = $row['sazetak'];
+      $vijesti[$i]['tekst'] = $row['tekst'];
+      $vijesti[$i]['slika'] = $row['slika'];
+      $vijesti[$i]['kategorija'] = $row['kategorija'];
+      $vijesti[$i]['arhiva'] = $row['arhiva'];
+    }
+  }
+
+  return $vijesti;
+}
 
 $vijesti = array();
 
-if(mysqli_num_rows($result) == 0) {
-  // $conn->close();
-  // die('no content');
-} else {
-  for($i = 0; $i < $MAX_LISTINGS; ++$i) {
-    $row = mysqli_fetch_array($result);
-    if (!$row) break;
-    if ($row['arhiva'] === '1') {
-      $MAX_LISTINGS++;
-      $i--;
-      continue;
-    }
-    $vijesti[$i] = $row;
-    $vijesti[$i]['id'] = $row['id'];
-    $vijesti[$i]['datum'] = $row['datum'];
-    $vijesti[$i]['naslov'] = $row['naslov'];
-    $vijesti[$i]['sazetak'] = $row['sazetak'];
-    $vijesti[$i]['tekst'] = $row['tekst'];
-    $vijesti[$i]['slika'] = $row['slika'];
-    $vijesti[$i]['kategorija'] = $row['kategorija'];
-    $vijesti[$i]['arhiva'] = $row['arhiva'];
-  }
-}
+$vijesti = array_merge($vijesti, queryForCategory($conn, "SELECT * FROM vijesti WHERE kategorija LIKE '%SVIJET%' ORDER BY id DESC LIMIT 4"));
+
+$vijesti = array_merge($vijesti, queryForCategory($conn, "SELECT * FROM vijesti WHERE kategorija LIKE '%EKONOMIJA%' ORDER BY id DESC LIMIT 4"));
 
 $svijet = '';
 
