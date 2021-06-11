@@ -1,4 +1,82 @@
 <?php
+
+function fileUploaded($formField)
+{
+    if(empty($_FILES)) {
+        return false;       
+    }  
+    return strcmp($_FILES[$formField]['name'], '') !== 0;
+}
+
+
+/**
+ * Inserts data into the database
+ * 
+ */
+
+function insertMetadata($id, $title, $about, $content, $category, $archived, $slika_param = '') {
+
+  include "../../config/connect.php";
+
+  $this_date = date("Y/m/d H:i:s");
+
+  $archived = intval($archived);
+  $id = intval($id);
+
+  $slika = $slika_param;
+
+  $conn->autocommit(false);
+
+  $stmt;
+
+  if (strcmp($slika, '') === 0) {
+
+    $query = "SELECT * FROM vijesti WHERE id = ?";
+  
+    $stmt = $conn->prepare($query);
+
+    $stmt->bind_param('i', $id);
+  
+    $stmt->execute();
+  
+    $result = $stmt->get_result();
+
+    if($result) {
+      
+      $row = mysqli_fetch_array($result);
+      
+      $slika = $row['slika'];
+    }
+  
+  }
+
+  $query = "UPDATE vijesti SET naslov = ?, sazetak = ?, tekst = ?, kategorija = ?, arhiva = ?, datum = ?, slika = ? WHERE id = ? ";
+
+  $stmt = $conn->prepare($query);
+
+  $stmt->bind_param("ssssissi", $title, $about, $content, $category, $archived, $this_date, $slika, $id);
+
+  $stmt->execute();
+
+  // error handling statement
+
+  if(!$stmt->execute()) {
+    $stmt->close();
+    $conn->close();
+    die("error in transaction");
+  }
+
+  // Commit transaction
+
+  if (!$conn -> commit()) {
+    die('Commit transaction failed');
+  }
+
+  $conn->autocommit(true);
+
+}
+
+
 session_start();
 if(isset($_SESSION['role']) && strcmp($_SESSION['role'], '1') == 0) {
 
@@ -107,80 +185,6 @@ fileUploaded('photo')) {
   
 }
 
-/**
- * Inserts data into the database
- * 
- */
-
-function insertMetadata($id, $title, $about, $content, $category, $archived, $slika_param = '') {
-
-  include "../../config/connect.php";
-
-  $this_date = date("Y/m/d H:i:s");
-
-  $archived = intval($archived);
-  $id = intval($id);
-
-  $slika = $slika_param;
-
-  $conn->autocommit(false);
-
-  $stmt;
-
-  if (strcmp($slika, '') === 0) {
-
-    $query = "SELECT * FROM vijesti WHERE id = ?";
-  
-    $stmt = $conn->prepare($query);
-
-    $stmt->bind_param('i', $id);
-  
-    $stmt->execute();
-  
-    $result = $stmt->get_result();
-
-    if($result) {
-      
-      $row = mysqli_fetch_array($result);
-      
-      $slika = $row['slika'];
-    }
-  
-  }
-
-  $query = "UPDATE vijesti SET naslov = ?, sazetak = ?, tekst = ?, kategorija = ?, arhiva = ?, datum = ?, slika = ? WHERE id = ? ";
-
-  $stmt = $conn->prepare($query);
-
-  $stmt->bind_param("ssssissi", $title, $about, $content, $category, $archived, $this_date, $slika, $id);
-
-  $stmt->execute();
-
-  // error handling statement
-
-  if(!$stmt->execute()) {
-    $stmt->close();
-    $conn->close();
-    die("error in transaction");
-  }
-
-  // Commit transaction
-
-  if (!$conn -> commit()) {
-    die('Commit transaction failed');
-  }
-
-  $conn->autocommit(true);
-
-}
-
-function fileUploaded($formField)
-{
-    if(empty($_FILES)) {
-        return false;       
-    }  
-    return strcmp($_FILES[$formField]['name'], '') !== 0;
-}
 } else {
   header('Location: http://localhost/projekt/pages/forbidden/forbidden.php');
 }
