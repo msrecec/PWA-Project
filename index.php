@@ -41,9 +41,9 @@ function queryForCategory($conn, $query) {
 
 $vijesti = array();
 
-$vijesti = array_merge($vijesti, queryForCategory($conn, "SELECT * FROM vijesti WHERE kategorija LIKE '%SVIJET%' ORDER BY id DESC LIMIT 4"));
+$vijesti = array_merge($vijesti, queryForCategory($conn, "SELECT * FROM vijesti WHERE kategorija LIKE '%SVIJET%' AND arhiva=0 ORDER BY id DESC LIMIT 4"));
 
-$vijesti = array_merge($vijesti, queryForCategory($conn, "SELECT * FROM vijesti WHERE kategorija LIKE '%EKONOMIJA%' ORDER BY id DESC LIMIT 4"));
+$vijesti = array_merge($vijesti, queryForCategory($conn, "SELECT * FROM vijesti WHERE kategorija LIKE '%EKONOMIJA%' AND arhiva=0 ORDER BY id DESC LIMIT 4"));
 
 $svijet = '';
 
