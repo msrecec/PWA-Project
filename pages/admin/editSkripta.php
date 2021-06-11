@@ -90,7 +90,7 @@ isset($_POST['title'])&&
 isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
-!isset($_POST['archived'])&&
+!isset($_POST['archive'])&&
 !fileUploaded('photo')) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
@@ -110,7 +110,7 @@ else if (
   isset($_POST['about'])&&
   isset($_POST['content'])&&
   isset($_POST['category'])&&
-  isset($_POST['archived'])&&
+  isset($_POST['archive'])&&
   !fileUploaded('photo')) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
@@ -129,7 +129,7 @@ isset($_POST['title'])&&
 isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
-!isset($_POST['archived'])&&
+!isset($_POST['archive'])&&
 fileUploaded('photo')) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
@@ -157,7 +157,7 @@ isset($_POST['title'])&&
 isset($_POST['about'])&&
 isset($_POST['content'])&&
 isset($_POST['category'])&&
-isset($_POST['archived'])&&
+isset($_POST['archive'])&&
 fileUploaded('photo')) {
   $id = intval($_POST['id']);
   $title = $_POST['title'];
