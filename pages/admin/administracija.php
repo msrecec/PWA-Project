@@ -6,7 +6,7 @@ session_start();
 
 if(isset($_SESSION['role']) && strcmp($_SESSION['role'], '1') == 0) {
   
-  $MAX_LISTINGS = 8;
+  // $MAX_LISTINGS = 8;
 
   $query = "SELECT * FROM vijesti ORDER BY id DESC";
 
@@ -20,9 +20,7 @@ if(isset($_SESSION['role']) && strcmp($_SESSION['role'], '1') == 0) {
     // $conn->close();
     // die('no content');
   } else {
-    for($i = 0; $i < $MAX_LISTINGS; ++$i) {
-      $row = mysqli_fetch_array($result);
-      if (!$row) break;
+    for($i = 0; $row = mysqli_fetch_array($result); ++$i) {
       
       $vijesti[$i] = $row;
       $vijesti[$i]['id'] = $row['id'];
