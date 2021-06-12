@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2021 at 01:30 AM
+-- Generation Time: Jun 12, 2021 at 08:08 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `projekt`
 --
+CREATE DATABASE IF NOT EXISTS `projekt` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `projekt`;
 
 -- --------------------------------------------------------
 
@@ -27,7 +29,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `korisnik`
 --
 
-DROP TABLE IF EXISTS `korisnik`;
 CREATE TABLE `korisnik` (
   `id` int(11) NOT NULL,
   `ime` varchar(32) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
@@ -55,7 +56,6 @@ INSERT INTO `korisnik` (`id`, `ime`, `prezime`, `korisnicko_ime`, `lozinka`, `ra
 -- Table structure for table `vijesti`
 --
 
-DROP TABLE IF EXISTS `vijesti`;
 CREATE TABLE `vijesti` (
   `id` int(11) NOT NULL,
   `datum` varchar(32) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
