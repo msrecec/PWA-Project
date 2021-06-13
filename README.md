@@ -1,6 +1,14 @@
 # PWA-Project
 Project for a uni course Programming of Web Applications
 
+## Credentials for database users
+ADMIN
+username: admin_account
+password: admin_account
+USER
+username: mislav
+password: mislav
+
 ## Link to the project video on YouTube
 https://youtu.be/676QPLU8rSk
 
