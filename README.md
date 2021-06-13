@@ -2,10 +2,10 @@
 Project for a uni course Programming of Web Applications
 
 ## Credentials for database users
-ADMIN
+###ADMIN
 username: admin_account
 password: admin_account
-USER
+###USER
 username: mislav
 password: mislav
 
