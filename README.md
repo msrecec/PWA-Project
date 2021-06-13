@@ -1,7 +1,7 @@
 # PWA-Project
 Project for a uni course Programming of Web Applications
 
-## Credentials for database users
+## Credentials for accounts
 ADMIN:
 username: admin_account
 password: admin_account
